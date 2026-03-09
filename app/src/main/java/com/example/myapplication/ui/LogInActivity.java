@@ -7,6 +7,10 @@ import static com.example.myapplication.utils.Utils.GRANT_TYPE;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +46,20 @@ public class LogInActivity extends AppCompatActivity {
 
         email.getEditText().setText(Utils.user.getEmail());
         password.getEditText().setText(Utils.user.getPassword());
+
+        // Apply animations
+        TextView title = findViewById(R.id.logintextView3);
+        TextView subtitle = findViewById(R.id.logintextView6);
+        LinearLayout card = findViewById(R.id.loginCard);
+
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        Animation slideUpDelayed = AnimationUtils.loadAnimation(this, R.anim.slide_up_delayed);
+
+        title.startAnimation(fadeIn);
+        subtitle.startAnimation(fadeIn);
+        card.startAnimation(slideUp);
+        button.startAnimation(slideUpDelayed);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)

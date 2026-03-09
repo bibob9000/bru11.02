@@ -9,6 +9,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +53,15 @@ public class OTPVerificationActivity extends AppCompatActivity {
         String emailRepeat = getIntent().getStringExtra("emailRepeat");
         Email email = new Email(emailRepeat);
 
+        // Apply animations
+        LinearLayout otpCard = findViewById(R.id.otpCard);
+        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        Animation slideUpDelayed = AnimationUtils.loadAnimation(this, R.anim.slide_up_delayed);
+        Animation bounceIn = AnimationUtils.loadAnimation(this, R.anim.bounce_in);
+
+        otpCard.startAnimation(bounceIn);
+        NewPassButton.startAnimation(slideUpDelayed);
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -66,7 +78,7 @@ public class OTPVerificationActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 resendText.setText("resend");
-                resendText.setTextColor(Color.parseColor("#0066CC"));
+                resendText.setTextColor(Color.parseColor("#00D2FF"));
                 runningTimer = false;
                 resendText.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -136,8 +148,8 @@ public class OTPVerificationActivity extends AppCompatActivity {
     private void ResetTimer(){
         if(runningTimer == false){
             runningTimer = true;
-            resendText.setTextColor(Color.parseColor("#A7A7A7"));
-            resendText.setOnClickListener(null); // Убираем предыдущий обработчик
+            resendText.setTextColor(Color.parseColor("#B0B0C0"));
+            resendText.setOnClickListener(null);
             resetCountDownTimer.start();
         }
     }

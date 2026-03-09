@@ -1,83 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:background="@drawable/gradient_background"
     tools:context=".ui.OTPVerificationActivity">
 
-    <TextView
+    <!-- Decorative glow -->
+    <View
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginBottom="-60dp"
+        android:layout_marginStart="-60dp"
+        android:background="@drawable/glow_circle" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/roboto_thin"
-        android:text="OTP Verification"
-        android:textColor="@color/gray"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter the 6 digit numbers sent to your email!"
-        android:fontFamily="@font/roboto_thin"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:textColor="@color/gray2"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"/>
-
-    <com.chaos.view.PinView
-        android:id="@+id/pinView"
-        android:layout_width="wrap_content"
-        android:layout_height="50sp"
-        app:hideLineWhenFilled="false"
-        android:cursorVisible="true"
-        android:inputType="number"
-        app:itemCount="6"
-        android:textSize="20sp"
-        app:itemSpacing="15sp">
-    </com.chaos.view.PinView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:layout_marginHorizontal="50sp"
-        android:weightSum="2">
-
-        <TextView
-            android:layout_width="320sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@+id/textview"
-            android:textColor="@color/gray2"
-            android:textSize="14sp" />
-        <TextView
-            android:id="@+id/resendAfter"
+        <LinearLayout
+            android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@+id/resendAfter"
-            android:textSize="14sp"
-            android:textColor="@color/gray2" />
+            android:orientation="vertical"
+            android:padding="28dp"
+            android:gravity="center_vertical">
 
-    </LinearLayout>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/SetNewPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="30dp"
-        app:cornerRadius="4dp"
-        android:backgroundTint="@color/gray2"
-        android:text="Set New Password" />
-</LinearLayout>
+            <!-- Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Верифікація OTP"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Введіть 6-значний код, надісланий на вашу пошту"
+                android:textSize="15sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="36dp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Card with PIN input -->
+            <LinearLayout
+                android:id="@+id/otpCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="28dp"
+                android:gravity="center">
+
+                <com.chaos.view.PinView
+                    android:id="@+id/pinView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50sp"
+                    app:hideLineWhenFilled="false"
+                    android:cursorVisible="true"
+                    android:inputType="number"
+                    app:itemCount="6"
+                    android:textSize="20sp"
+                    android:textColor="@color/text_primary"
+                    app:lineColor="@color/primary"
+                    app:itemSpacing="10sp" />
+
+                <!-- Resend timer -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Не отримали код? "
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/resendAfter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="resend"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/accent" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Set New Password button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/SetNewPass"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/gradient_button"
+                app:backgroundTint="@null"
+                app:cornerRadius="14dp"
+                android:text="Підтвердити"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:elevation="8dp"
+                android:stateListAnimator="@null" />
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

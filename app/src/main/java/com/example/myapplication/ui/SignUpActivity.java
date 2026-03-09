@@ -5,6 +5,9 @@ import static com.example.myapplication.utils.Utils.BASE_URL;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +47,20 @@ public class SignUpActivity extends AppCompatActivity {
         email = findViewById(R.id.emailAddress);
         pswrd1 = findViewById(R.id.passwordTextInputLayout);
         pswrd2 = findViewById(R.id.confirmPasswordTextInputLayout);
+
+        // Apply animations
+        TextView title = findViewById(R.id.textView3);
+        TextView subtitle = findViewById(R.id.textView6);
+        LinearLayout card = findViewById(R.id.signupCard);
+
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        Animation slideUpDelayed = AnimationUtils.loadAnimation(this, R.anim.slide_up_delayed);
+
+        title.startAnimation(fadeIn);
+        subtitle.startAnimation(fadeIn);
+        card.startAnimation(slideUp);
+        button.startAnimation(slideUpDelayed);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)

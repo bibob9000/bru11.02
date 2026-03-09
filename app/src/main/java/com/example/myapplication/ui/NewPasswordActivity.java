@@ -7,6 +7,9 @@ import static com.example.myapplication.utils.Utils.GRANT_TYPE;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +46,14 @@ public class NewPasswordActivity extends AppCompatActivity {
         TextInputEditText newPassConfirm = findViewById(R.id.newPasswordConfirmField);
         TextInputEditText newPassField = findViewById(R.id.newPasswordField);
 
+        // Apply animations
+        LinearLayout card = findViewById(R.id.newPassCard);
+        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        Animation slideUpDelayed = AnimationUtils.loadAnimation(this, R.anim.slide_up_delayed);
+
+        card.startAnimation(slideUp);
+        newPassButton.startAnimation(slideUpDelayed);
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -51,14 +62,12 @@ public class NewPasswordActivity extends AppCompatActivity {
         API api = retrofit.create(API.class);
 
         newPassButton.setOnClickListener(new View.OnClickListener() {
-            // Убрать повторное действие для изменения пароля
             @Override
             public void onClick(View v) {
                 if (newPassField.getText().toString().equals(newPassConfirm.getText().toString())) {
                     if (newPassField.getText().toString().length() < 8) {
                         Toast.makeText(NewPasswordActivity.this, "Ваш пароль должен быть не менее 8 символов", Toast.LENGTH_SHORT).show();
                     } else {
-                        // Перезапуск формы на вашу машину для смены пароля
                         User user = new User(EmailForPassChange, newPassField.getText().toString());
                         Call<Void> call = api.updatePassword(APIKEY, "Bearer " + newToken, user);
                         call.enqueue(new Callback<Void>() {
@@ -66,7 +75,6 @@ public class NewPasswordActivity extends AppCompatActivity {
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 if (response.isSuccessful()) {
                                     Toast.makeText(NewPasswordActivity.this, "Password changed", Toast.LENGTH_SHORT).show();
-                                    // Отправить запрос на авторизацию с новой паролем
                                     Call<ResponseUser> loginCall = api.login(GRANT_TYPE, APIKEY, user);
                                     loginCall.enqueue(new Callback<ResponseUser>() {
                                         @Override

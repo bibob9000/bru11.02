@@ -6,6 +6,10 @@ import static com.example.myapplication.utils.Utils.BASE_URL;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +40,20 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         emailField = findViewById(R.id.forgotEmailAddress);
         button = findViewById(R.id.button_forgot);
+
+        // Apply animations
+        TextView title = findViewById(R.id.forgotttextView3);
+        TextView subtitle = findViewById(R.id.forgotttextView6);
+        LinearLayout card = findViewById(R.id.forgotCard);
+
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        Animation slideUpDelayed = AnimationUtils.loadAnimation(this, R.anim.slide_up_delayed);
+
+        title.startAnimation(fadeIn);
+        subtitle.startAnimation(fadeIn);
+        card.startAnimation(slideUp);
+        button.startAnimation(slideUpDelayed);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -72,7 +90,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
     }
 
-    public void signIn2(View view) {
+    public void signin2(View view) {
         startActivity(new Intent(ForgotPasswordActivity.this, LogInActivity.class));
     }
 

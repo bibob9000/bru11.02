@@ -1,11 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base colors -->
     <color name="black">#FF000000</color>
-    <color name="white">#E0C396</color>
-    <color name="blue">#6D300C</color>
-    <color name="gray">#FF8523</color>
-    <color name="gray2">#FFA87A</color>
-    <color name="yellow">#00FFDE</color>
-    <color name="blue2">#017785</color>
-    <color name="red">#FF0000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#FFFF6B6B</color>
+
+    <!-- Background gradient colors -->
+    <color name="bg_gradient_start">#0F0C29</color>
+    <color name="bg_gradient_center">#302B63</color>
+    <color name="bg_gradient_end">#24243E</color>
+
+    <!-- Card / Surface -->
+    <color name="card_bg">#2A2A3D</color>
+    <color name="card_bg_alpha">#CC2A2A3D</color>
+
+    <!-- Primary accent (purple-blue) -->
+    <color name="primary">#6C63FF</color>
+    <color name="primary_dark">#4834DF</color>
+    <color name="primary_light">#A29BFE</color>
+
+    <!-- Secondary accent (cyan) -->
+    <color name="accent">#00D2FF</color>
+    <color name="accent_dark">#0099CC</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#B0B0C0</color>
+    <color name="text_hint">#66FFFFFF</color>
+    <color name="text_link">#00D2FF</color>
+
+    <!-- Input fields -->
+    <color name="input_bg">#1E1E30</color>
+    <color name="input_stroke">#3D3D5C</color>
+    <color name="input_stroke_focused">#6C63FF</color>
+
+    <!-- Button gradient -->
+    <color name="btn_gradient_start">#6C63FF</color>
+    <color name="btn_gradient_end">#4834DF</color>
+
+    <!-- Status colors -->
+    <color name="success">#4ECDC4</color>
+    <color name="error">#FF6B6B</color>
+    <color name="warning">#FFE66D</color>
+
+    <!-- Legacy mappings (keeping names for Java code compatibility) -->
+    <color name="blue">#6C63FF</color>
+    <color name="gray">#B0B0C0</color>
+    <color name="gray2">#8080A0</color>
+    <color name="yellow">#00D2FF</color>
+    <color name="blue2">#4ECDC4</color>
 </resources>
